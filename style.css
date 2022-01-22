@@ -1,6 +1,6 @@
-* {
-/* 	outline: 1px dashed red; */
-}
+/** {
+ 	outline: 1px dashed red; 
+}*/
 
 :root {
 	font-family: 'Roboto', Arial, Helvetica, sans-serif;
@@ -20,6 +20,8 @@ main {
 	height: 100vh;
 	width: 85vw;
 }
+
+/*info board*/
 
 .info {
 	display: flex;
@@ -61,6 +63,8 @@ main {
 	border: 1px solid gray;
 }
 
+/*game board*/
+
 .board-container {
 	display: flex;
 	justify-content: center;
@@ -86,4 +90,9 @@ main {
 
 .cell:hover {
 	background-color: lightgray;
+}
+
+/*reset button*/
+.btn-reset {
+	padding: 1em;
 }
