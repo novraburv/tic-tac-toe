@@ -5,3 +5,56 @@
 :root {
 	font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
+
+body {
+	display: flex;
+	justify-content: center;
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+	gap: 25px;
+  
+	width: 85vw;
+}
+
+.info {
+	display: flex;
+	flex-direction: column;
+	
+	text-align: center;
+}
+
+.info__activePlayer,
+.score__playerName,
+.score__playerScore {
+	padding: 1rem;
+}
+
+.info__scores {
+	display: flex;
+	justify-content: center;
+}
+
+.score {
+	width: 150px;
+}
+
+.board-container {
+	display: flex;
+	justify-content: center;
+}
+
+.board {
+	display: grid;
+	grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+	
+	height: 350px;
+	width: 350px;
+}
+
+.cell {
+	height: 100%;
+	width: 100%;
+}

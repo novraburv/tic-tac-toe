@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,13 +13,45 @@
 
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;900&display=swap" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;900&display=swap" rel="stylesheet">
 
 	<!-- custom scripts and styles -->
 	<link rel="stylesheet" href="./style.css">
 	<script src="./scripts.js" defer></script>
 </head>
+
 <body>
-	
+	<main>
+		<div class="info">
+			<div class="info__activePlayer">
+				Turn of <span class='activePlayer'>X</span>
+			</div>
+			<div class="info__scores">
+				<div class="score">
+					<div class="score__playerName">X</div>
+					<div class="score__playerScore XScore">0</div>
+				</div>
+				<div class="score">
+					<div class="score__playerName">O</div>
+					<div class="score__playerScore OScore">0</div>
+				</div>
+			</div>
+		</div>
+		<div class="board-container">
+			<div class="board">
+				<div class="cell" data-index="0"></div>
+				<div class="cell" data-index="1"></div>
+				<div class="cell" data-index="2"></div>
+				<div class="cell" data-index="3"></div>
+				<div class="cell" data-index="4"></div>
+				<div class="cell" data-index="5"></div>
+				<div class="cell" data-index="6"></div>
+				<div class="cell" data-index="7"></div>
+				<div class="cell" data-index="8"></div>
+			</div>
+		</div>
+		<button class="btn btn-reset">RESET GAME</button>
+	</main>
 </body>
+
 </html>
