@@ -46,6 +46,7 @@ const displayController = (() => {
 		gameBoard.setCell(e.target.dataset.index, gameController.getPlayer());
 		updateBoard();
 		updateActivePlayer();
+		gameController.evaluate();
 	}
 	function reset() {
 		gameBoard.reset();
@@ -80,7 +81,24 @@ const gameController = (() => {
 			player = 'X';
 		}
 	}
-	return { getPlayer, setPlayer, changePlayer }
+	function evaluate() {
+		const winPosition = ['012','345','678','036','147','258','048','246'];
+		const board = gameBoard.getBoard();
+		let XPos = '';
+		let OPos = '';
+		let XWin = false;
+		let OWin = false;
+		for (let i = 0; i < board.length; i++) {
+			if (board[i] === 'X') XPos += i;
+			if (board[i] === 'O') OPos += i;
+		}
+		winPosition.forEach(pos => {
+			if (pos.split('').every(index => XPos.includes(index))) XWin = true;
+			if (pos.split('').every(index => OPos.includes(index))) OWin = true;
+		})
+		if (XWin || OWin) alert('THERE IS A FUCKING WINNER HERE!')
+	}
+	return { getPlayer, setPlayer, changePlayer, evaluate }
 })();
 
 
