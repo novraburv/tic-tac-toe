@@ -1,7 +1,8 @@
 "use strict"
 
+// This module saves and edit board's data
 const gameBoard = (() => {
-	const board = new Array(9);
+	let board = new Array(9);
 
 	function getBoard() {
 		return board;
@@ -12,7 +13,10 @@ const gameBoard = (() => {
 	function setCell(index, value) {
 		board[index] = value;
 	}
-	return { getBoard, getCell, setCell }
+	function reset() {
+		board = new Array(9);
+	}
+	return { getBoard, getCell, setCell, reset }
 })();
 
 // Module to control its UI
@@ -23,6 +27,7 @@ const gameBoard = (() => {
 const displayController = (() => {
 	const board = document.querySelector('.board');
 	const cells = board.querySelectorAll('.cell');
+	const resetButton = document.querySelector('.btn-reset');
 
 	function updateBoard() {
 		cells.forEach(cell => {
@@ -33,9 +38,14 @@ const displayController = (() => {
 		cells.forEach(cell => {
 			cell.addEventListener('click', clickCell);
 		})
+		resetButton.addEventListener('click', reset)
 	}
 	function clickCell(e) {
 		gameBoard.setCell(e.target.dataset.index, 'FT');
+		updateBoard();
+	}
+	function reset() {
+		gameBoard.reset();
 		updateBoard();
 	}
 	return { updateBoard, startUp }
