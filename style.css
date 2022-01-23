@@ -1,7 +1,102 @@
-* {
-	outline: 1px dashed red;
-}
+/** {
+ 	outline: 1px dashed red; 
+}*/
 
 :root {
 	font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+body {
+	display: flex;
+	justify-content: center;
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 25px;
+  
+	height: 100vh;
+	width: 85vw;
+}
+
+/*info board*/
+
+.info {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	
+	text-align: center;
+}
+
+.info__activePlayer,
+.score__playerName,
+.score__playerScore {
+	padding: 1rem;
+}
+
+.info__activePlayer,
+.score__playerName {
+	background-color: lightgray;
+	font-weight: bolder;
+}
+
+.info__activePlayer {
+	font-size: 1.5em;
+}
+
+.activePlayer {
+	color: red;
+}
+
+.info__scores {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+}
+
+.score {
+	width: 150px;
+	
+	border: 1px solid gray;
+}
+
+/*game board*/
+
+.board-container {
+	display: flex;
+	justify-content: center;
+}
+
+.board,
+.cell {
+	border: 1px solid gray;
+}
+
+.board {
+	display: grid;
+	grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+	
+	height: 350px;
+	width: 350px;
+}
+
+.cell {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+}
+
+.cell:hover {
+	background-color: lightgray;
+}
+
+/*reset button*/
+
+.btn-reset {
+	padding: 1em;
 }
