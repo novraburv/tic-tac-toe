@@ -28,6 +28,7 @@ const displayController = (() => {
 	const board = document.querySelector('.board');
 	const cells = board.querySelectorAll('.cell');
 	const resetButton = document.querySelector('.btn-reset');
+	const activePlayer = document.querySelector('.activePlayer');
 
 	function updateBoard() {
 		cells.forEach(cell => {
@@ -41,16 +42,46 @@ const displayController = (() => {
 		resetButton.addEventListener('click', reset)
 	}
 	function clickCell(e) {
-		gameBoard.setCell(e.target.dataset.index, 'FT');
+		if (gameBoard.getCell(e.target.dataset.index)) return;
+		gameBoard.setCell(e.target.dataset.index, gameController.getPlayer());
 		updateBoard();
+		updateActivePlayer();
 	}
 	function reset() {
 		gameBoard.reset();
 		updateBoard();
+		gameController.setPlayer('X');
+		activePlayer.textContent = gameController.getPlayer();
+	}
+	function updateActivePlayer() {
+		gameController.changePlayer();
+		activePlayer.textContent = gameController.getPlayer();
 	}
 	return { updateBoard, startUp }
 })();
-const gameController = (() => {})();
+
+// This module control the flow of this game
+// must be able to:
+// 	change active player;
+// 	evaluate whether the game is completed or not;
+const gameController = (() => {
+	let player = 'X';
+
+	function getPlayer() {
+		return player;
+	}
+	function setPlayer(value) {
+		player = value;
+	}
+	function changePlayer() {
+		if (player === 'X') {
+			player = 'O';
+		} else {
+			player = 'X';
+		}
+	}
+	return { getPlayer, setPlayer, changePlayer }
+})();
 
 
 displayController.startUp();
