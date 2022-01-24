@@ -28,7 +28,10 @@ const displayController = (() => {
 	const board = document.querySelector('.board');
 	const cells = board.querySelectorAll('.cell');
 	const resetButton = document.querySelector('.btn-reset');
+	const nextButton = document.querySelector('.btn-next');
 	const activePlayer = document.querySelector('.activePlayer');
+	const winningBanner = document.querySelector('.winning-announcement');
+	const winningMsg = document.querySelector('.winning-message');
 
 	function updateBoard() {
 		cells.forEach(cell => {
@@ -39,14 +42,15 @@ const displayController = (() => {
 		cells.forEach(cell => {
 			cell.addEventListener('click', clickCell);
 		})
-		resetButton.addEventListener('click', reset)
+		resetButton.addEventListener('click', reset);
+		nextButton.addEventListener('click', next);
 	}
 	function clickCell(e) {
 		if (gameBoard.getCell(e.target.dataset.index)) return;
 		gameBoard.setCell(e.target.dataset.index, gameController.getPlayer());
 		updateBoard();
 		updateActivePlayer();
-		gameController.evaluate();
+		checkWinner();
 	}
 	function reset() {
 		gameBoard.reset();
@@ -54,9 +58,25 @@ const displayController = (() => {
 		gameController.setPlayer('X');
 		activePlayer.textContent = gameController.getPlayer();
 	}
+	function next() {
+		reset();
+		winningBanner.style.display = 'none';
+	}
 	function updateActivePlayer() {
 		gameController.changePlayer();
 		activePlayer.textContent = gameController.getPlayer();
+	}
+	function checkWinner() {
+		const result = gameController.evaluate();
+		if (!result) return;
+		winningMsg.innerHTML = '';
+		if (result === 'X') {
+			winningMsg.innerHTML = `Congratulation! <span class="activePlayer">${result}</span> won this round.`;
+		}
+		if (result === 'O') {
+			winningMsg.innerHTML = `How unfortunate! <span class="activePlayer">${result}</span> won this round.`;
+		}
+		winningBanner.style.display = 'flex';
 	}
 	return { updateBoard, startUp }
 })();
@@ -86,17 +106,16 @@ const gameController = (() => {
 		const board = gameBoard.getBoard();
 		let XPos = '';
 		let OPos = '';
-		let XWin = false;
-		let OWin = false;
+		let winner = undefined;
 		for (let i = 0; i < board.length; i++) {
 			if (board[i] === 'X') XPos += i;
 			if (board[i] === 'O') OPos += i;
 		}
 		winPosition.forEach(pos => {
-			if (pos.split('').every(index => XPos.includes(index))) XWin = true;
-			if (pos.split('').every(index => OPos.includes(index))) OWin = true;
+			if (pos.split('').every(index => XPos.includes(index))) winner = 'X';
+			if (pos.split('').every(index => OPos.includes(index))) winner = 'O';
 		})
-		if (XWin || OWin) alert('THERE IS A FUCKING WINNER HERE!')
+		return winner;
 	}
 	return { getPlayer, setPlayer, changePlayer, evaluate }
 })();
