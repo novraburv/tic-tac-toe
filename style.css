@@ -61,7 +61,7 @@ main {
 .score {
 	width: 150px;
 	
-	border: 1px solid gray;
+	border: 1px solid lightgray;
 }
 
 /*game board*/
@@ -117,3 +117,6 @@ main {
 	
 }
 
+.three-wins-hidden {
+	display: none;
+}
