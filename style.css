@@ -1,6 +1,6 @@
-/** {
+/* * {
  	outline: 1px dashed red; 
-}*/
+} */
 
 :root {
 	font-family: 'Roboto', Arial, Helvetica, sans-serif;
@@ -49,6 +49,7 @@ main {
 
 .activePlayer {
 	color: red;
+	font-weight: bolder;
 }
 
 .info__scores {
@@ -60,7 +61,7 @@ main {
 .score {
 	width: 150px;
 	
-	border: 1px solid gray;
+	border: 1px solid lightgray;
 }
 
 /*game board*/
@@ -99,4 +100,23 @@ main {
 
 .btn-reset {
 	padding: 1em;
+}
+
+/* winner announcement banner */
+.winning-announcement {
+	position: fixed;
+	inset: 0;
+	
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	
+	width: 100%;
+	background-color: white;
+	
+}
+
+.three-wins-hidden {
+	display: none;
 }
