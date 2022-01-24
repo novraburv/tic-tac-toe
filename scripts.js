@@ -2,7 +2,13 @@
 
 // This module saves and edit board's data
 const gameBoard = (() => {
-	let board = new Array(9);
+	let board = [];
+
+	(function startBoard() {
+		for (let i = 0; i < 9; i++) {
+			board.push(undefined);
+		}
+	})()
 
 	function getBoard() {
 		return board;
@@ -14,7 +20,7 @@ const gameBoard = (() => {
 		board[index] = value;
 	}
 	function reset() {
-		board = new Array(9);
+		board = board.map(() => undefined);
 	}
 	return { getBoard, getCell, setCell, reset }
 })();
@@ -90,6 +96,9 @@ const displayController = (() => {
 			OScore.textContent = O.getScore();
 			winningMsg.innerHTML = `How unfortunate! <span class="activePlayer">${result}</span> won this round.`;
 		}
+		if (result === 'tie') {
+			winningMsg.innerHTML = 'Oh! None of you won this game. What a shame!';
+		}
 		winningBanner.style.display = 'flex';
 	}
 	function checkEnd() {
@@ -127,7 +136,7 @@ const gameController = (() => {
 		}
 	}
 	function evaluate() {
-		const winPosition = ['012','345','678','036','147','258','048','246'];
+		const winPosition = ['012', '345', '678', '036', '147', '258', '048', '246'];
 		const board = gameBoard.getBoard();
 		let XPos = '';
 		let OPos = '';
@@ -140,6 +149,7 @@ const gameController = (() => {
 			if (pos.split('').every(index => XPos.includes(index))) winner = 'X';
 			if (pos.split('').every(index => OPos.includes(index))) winner = 'O';
 		})
+		if (board.every(n => !(!n))) winner = 'tie';
 		return winner;
 	}
 	return { getPlayer, setPlayer, changePlayer, evaluate }
